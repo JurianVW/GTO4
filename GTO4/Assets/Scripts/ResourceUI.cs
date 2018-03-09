@@ -6,21 +6,26 @@ using UnityEngine.UI;
 public class ResourceUI : MonoBehaviour
 {
 
-    public Resource resource;
-    [Space(10)]
-    public Text goldValue;
-    public Text silverValue;
-    public Text bronzeValue;
+    public List<ResourceText> resources;
 
     void Start()
     {
-        Resource.ResourceValueChanged += UpdateUI;
+        Resource.ResourceAmountChanged += UpdateUI;
+        UpdateUI();
     }
 
     private void UpdateUI()
     {
-        goldValue.text = resource.gold.ToString();
-        silverValue.text = resource.silver.ToString();
-        bronzeValue.text = resource.bronze.ToString();
+        foreach (ResourceText rt in resources)
+        {
+            rt.resourceText.text = rt.resource.amount.ToString();
+        }
+    }
+
+    [System.Serializable]
+    public struct ResourceText
+    {
+        public Resource resource;
+        public Text resourceText;
     }
 }

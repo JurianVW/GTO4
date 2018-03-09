@@ -4,43 +4,34 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
+    public int startAmount;
+    public int amount;
 
-    public float gold;
-    public float silver;
-    public float bronze;
+    public delegate void amountChange();
+    public static event amountChange ResourceAmountChanged;
 
-    public delegate void FloatChange();
-    public static event FloatChange ResourceValueChanged;
     void Start()
     {
-        SetGold(25);
-        SetSilver(45);
-        SetBronze(10);
+        amount = startAmount;
     }
 
-    public void SetGold(int amount)
+    public void AddAmount(int amount)
     {
-        gold += amount;
-        ResourceChanged();
+        this.amount += amount;
+        AmountChanged();
     }
 
-    public void SetSilver(int amount)
+    public void RemoveAmount(int amount)
     {
-        silver += amount;
-        ResourceChanged();
+        this.amount -= amount;
+        AmountChanged();
     }
 
-    public void SetBronze(int amount)
+    private void AmountChanged()
     {
-        bronze += amount;
-        ResourceChanged();
-    }
-
-    private void ResourceChanged()
-    {
-        if (ResourceValueChanged != null)
+        if (ResourceAmountChanged != null)
         {
-            ResourceValueChanged();
+            ResourceAmountChanged();
         }
     }
 }
