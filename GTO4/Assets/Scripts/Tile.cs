@@ -12,5 +12,4 @@ public class Tile : MonoBehaviour
         this.x = x;
         this.y = y;
     }
-
 }

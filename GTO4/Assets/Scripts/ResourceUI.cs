@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class ResourceUI : MonoBehaviour
 {
 
+    public Player player;
     public List<ResourceText> resources;
 
-    void Start()
+    void OnEnable()
     {
         Resource.ResourceAmountChanged += UpdateUI;
-        UpdateUI();
     }
 
     private void UpdateUI()

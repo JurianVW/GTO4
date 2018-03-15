@@ -13,6 +13,7 @@ public class Resource : MonoBehaviour
     void Start()
     {
         amount = startAmount;
+        AmountChanged();
     }
 
     public void AddAmount(int amount)
@@ -24,6 +25,7 @@ public class Resource : MonoBehaviour
     public void RemoveAmount(int amount)
     {
         this.amount -= amount;
+        if(this.amount < 0) this.amount = 0;
         AmountChanged();
     }
 
