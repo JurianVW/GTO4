@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
     public float tileOffset;
     public Tile prefab;
     private Tile[,] tiles;
-
+    
     void Start()
     {
         tiles = new Tile[gridWidth, gridHeight];
@@ -17,7 +17,7 @@ public class Grid : MonoBehaviour
             for (int j = 0; j < gridHeight; j++)
             {
                 Tile tile = Instantiate(prefab, new Vector3(i * (prefab.transform.localScale.x + tileOffset), 0, j * (prefab.transform.localScale.z + tileOffset)), Quaternion.identity);
-                tile.setLocation(i, j);
+                tile.SetLocation(i, j);
                 tile.transform.SetParent(this.transform);
                 tiles[i, j] = tile;
             }

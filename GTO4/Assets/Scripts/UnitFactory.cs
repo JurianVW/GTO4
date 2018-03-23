@@ -15,7 +15,7 @@ public class UnitFactory : MonoBehaviour
         grid = player.GetComponent<PlayerConfiguration>().grid;
     }
 
-    public void BuyUnit()
+    public void BuyUnit(Tile tile)
     {
         bool enoughRecourses = true;
 
@@ -25,13 +25,13 @@ public class UnitFactory : MonoBehaviour
         }
         if (enoughRecourses)
         {
-            Tile tile = grid.getEmptyTile();
-            if (tile != null)
+           if (!tile.occupied)
             {
-                tile.occupied = true;
+                tile.SetOccupied(true);
                 Unit unit = Instantiate(prefab, new Vector3(tile.transform.position.x, 0.5f, tile.transform.position.z), Quaternion.identity);
                 unit.transform.SetParent(tile.transform);
-                unit.setPlayer(player);
+                unit.SetPlayer(player);
+                tile.SetUnit(unit);
                 foreach (ResourceCost rc in resourceCost)
                 {
                     rc.resource.RemoveAmount(rc.cost);
